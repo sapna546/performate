@@ -20,7 +20,7 @@ Performate is a modern dashboard and runner for Apify actors, built with Next.js
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/adityasriv2317/performate.git
+   git clone https://github.com/sapna546/performate
    cd performate
    ```
 2. Install dependencies:
