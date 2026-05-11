@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: performate
+spec:
+  selector:
+    app: performate
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: NodePort

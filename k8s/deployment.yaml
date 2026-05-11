@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: performate-deployment
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: performate
+
+  template:
+    metadata:
+      labels:
+        app: performate
+
+    spec:
+      containers:
+        - name: performate
+
+          image: nisha3104/performate:v2
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 3000
+
+          envFrom:
+            - configMapRef:
+                name: performate-config
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 3
+            failureThreshold: 3
